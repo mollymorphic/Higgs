@@ -5,7 +5,7 @@
 *  This file is part of the Higgs project. The project is distributed at:
 *  https://github.com/maximecb/Higgs
 *
-*  Copyright (c) 2011-2014, Maxime Chevalier-Boisvert. All rights reserved.
+*  Copyright (c) 2011-2015, Maxime Chevalier-Boisvert. All rights reserved.
 *
 *  This software is licensed under the following license (Modified BSD
 *  License):
@@ -51,6 +51,7 @@ import parser.ast;
 import ir.ops;
 import ir.livevars;
 import ir.typeprop;
+import runtime.gc;
 import runtime.vm;
 import runtime.layout;
 import runtime.object;
@@ -124,8 +125,11 @@ class IRFunction : IdObject
     /// Type analysis results (may be null)
     TypeProp typeInfo = null;
 
-    /// Regular entry point code
+    /// Generic function entry point
     CodePtr entryCode = null;
+
+    /// C entry point code
+    CodeBlock cEntryCode;
 
     /// Map of blocks to lists of existing versions
     BlockVersion[][IRBlock] versionMap;
